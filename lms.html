@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduLearn - Learning Management System</title>
+    <link rel="stylesheet" href="lms.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-graduation-cap"></i>
+                <span>EduLearn</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#" class="nav-link" data-page="home">Home</a>
+                <a href="#" class="nav-link" data-page="courses">Courses</a>
+                <a href="#" class="nav-link" data-page="dashboard">Dashboard</a>
+                <a href="#" class="nav-link" data-page="profile">Profile</a>
+            </div>
+            <div class="nav-auth" id="nav-auth">
+                <button class="btn btn-outline" id="login-btn">Login</button>
+                <button class="btn btn-primary" id="signup-btn">Sign Up</button>
+            </div>
+            <div class="user-menu" id="user-menu" style="display: none;">
+                <div class="user-avatar">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="user-name">John Doe</span>
+                </div>
+                <button class="btn btn-outline" id="logout-btn">Logout</button>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Page -->
+        <div class="page" id="home-page">
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>Transform Your Learning Journey</h1>
+                    <p>Access world-class courses, track your progress, and achieve your educational goals with our comprehensive learning management system.</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary btn-large" id="get-started-btn">Get Started</button>
+                        <button class="btn btn-outline btn-large" id="explore-courses-btn">Explore Courses</button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+            </section>
+
+            <section class="features">
+                <div class="container">
+                    <h2>Why Choose EduLearn?</h2>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <i class="fas fa-play-circle"></i>
+                            <h3>Interactive Lessons</h3>
+                            <p>Engage with multimedia content including videos, quizzes, and interactive exercises.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>Progress Tracking</h3>
+                            <p>Monitor your learning progress with detailed analytics and completion certificates.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-users"></i>
+                            <h3>Expert Instructors</h3>
+                            <p>Learn from industry professionals and experienced educators.</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-mobile-alt"></i>
+                            <h3>Mobile Learning</h3>
+                            <p>Access your courses anywhere, anytime on any device.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Login Modal -->
+        <div class="modal" id="login-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Login to EduLearn</h2>
+                    <span class="close" id="close-login">&times;</span>
+                </div>
+                <form class="auth-form" id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="remember-me">
+                            <span class="checkmark"></span>
+                            Remember me
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Login</button>
+                </form>
+                <div class="auth-footer">
+                    <p>Don't have an account? <a href="#" id="switch-to-signup">Sign up</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Signup Modal -->
+        <div class="modal" id="signup-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Join EduLearn</h2>
+                    <span class="close" id="close-signup">&times;</span>
+                </div>
+                <form class="auth-form" id="signup-form">
+                    <div class="form-group">
+                        <label for="signup-name">Full Name</label>
+                        <input type="text" id="signup-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input type="email" id="signup-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-type">I am a:</label>
+                        <select id="user-type" required>
+                            <option value="">Select...</option>
+                            <option value="student">Student</option>
+                            <option value="instructor">Instructor</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+                </form>
+                <div class="auth-footer">
+                    <p>Already have an account? <a href="#" id="switch-to-login">Login</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Courses Page -->
+        <div class="page" id="courses-page" style="display: none;">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Available Courses</h1>
+                    <div class="search-filter">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Search courses..." id="course-search">
+                        </div>
+                        <select id="category-filter">
+                            <option value="">All Categories</option>
+                            <option value="programming">Programming</option>
+                            <option value="design">Design</option>
+                            <option value="business">Business</option>
+                            <option value="marketing">Marketing</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="courses-grid" id="courses-grid">
+                    <!-- Courses will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Page -->
+        <div class="page" id="dashboard-page" style="display: none;">
+            <div class="container">
+                <div class="dashboard-header">
+                    <h1>My Dashboard</h1>
+                    <div class="dashboard-stats">
+                        <div class="stat-card">
+                            <i class="fas fa-book"></i>
+                            <div class="stat-info">
+                                <span class="stat-number" id="enrolled-courses">0</span>
+                                <span class="stat-label">Enrolled Courses</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-trophy"></i>
+                            <div class="stat-info">
+                                <span class="stat-number" id="completed-courses">0</span>
+                                <span class="stat-label">Completed</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-clock"></i>
+                            <div class="stat-info">
+                                <span class="stat-number" id="study-hours">0</span>
+                                <span class="stat-label">Study Hours</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-content">
+                    <div class="dashboard-section">
+                        <h2>Continue Learning</h2>
+                        <div class="progress-courses" id="progress-courses">
+                            <!-- Progress courses will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <div class="dashboard-section">
+                        <h2>Recent Activity</h2>
+                        <div class="activity-feed" id="activity-feed">
+                            <!-- Activity feed will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Course Viewer -->
+        <div class="page" id="course-viewer" style="display: none;">
+            <div class="course-viewer-container">
+                <div class="course-sidebar">
+                    <div class="course-info">
+                        <h3 id="course-title">Course Title</h3>
+                        <div class="course-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="course-progress-fill"></div>
+                            </div>
+                            <span id="course-progress-text">0% Complete</span>
+                        </div>
+                    </div>
+                    <div class="course-curriculum" id="course-curriculum">
+                        <!-- Curriculum will be populated by JavaScript -->
+                    </div>
+                </div>
+                <div class="course-content">
+                    <div class="lesson-header">
+                        <button class="btn btn-outline" id="back-to-courses">
+                            <i class="fas fa-arrow-left"></i> Back to Courses
+                        </button>
+                        <h2 id="lesson-title">Lesson Title</h2>
+                    </div>
+                    <div class="lesson-content" id="lesson-content">
+                        <!-- Lesson content will be populated by JavaScript -->
+                    </div>
+                    <div class="lesson-navigation">
+                        <button class="btn btn-outline" id="prev-lesson" disabled>
+                            <i class="fas fa-chevron-left"></i> Previous
+                        </button>
+                        <button class="btn btn-primary" id="next-lesson">
+                            Next <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Page -->
+        <div class="page" id="profile-page" style="display: none;">
+            <div class="container">
+                <div class="profile-container">
+                    <div class="profile-sidebar">
+                        <div class="profile-avatar">
+                            <i class="fas fa-user-circle"></i>
+                            <button class="btn btn-outline btn-small">Change Photo</button>
+                        </div>
+                        <div class="profile-menu">
+                            <a href="#" class="profile-menu-item active" data-tab="personal">Personal Info</a>
+                            <a href="#" class="profile-menu-item" data-tab="security">Security</a>
+                            <a href="#" class="profile-menu-item" data-tab="preferences">Preferences</a>
+                            <a href="#" class="profile-menu-item" data-tab="certificates">Certificates</a>
+                        </div>
+                    </div>
+                    <div class="profile-content">
+                        <div class="profile-tab active" id="personal-tab">
+                            <h2>Personal Information</h2>
+                            <form class="profile-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="profile-name">Full Name</label>
+                                        <input type="text" id="profile-name" value="John Doe">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="profile-email">Email</label>
+                                        <input type="email" id="profile-email" value="john@example.com">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="profile-phone">Phone</label>
+                                        <input type="tel" id="profile-phone" value="+1 234 567 8900">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="profile-location">Location</label>
+                                        <input type="text" id="profile-location" value="New York, USA">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="profile-bio">Bio</label>
+                                    <textarea id="profile-bio" rows="4">Passionate learner interested in technology and design.</textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                            </form>
+                        </div>
+                        <div class="profile-tab" id="security-tab">
+                            <h2>Security Settings</h2>
+                            <form class="profile-form">
+                                <div class="form-group">
+                                    <label for="current-password">Current Password</label>
+                                    <input type="password" id="current-password">
+                                </div>
+                                <div class="form-group">
+                                    <label for="new-password">New Password</label>
+                                    <input type="password" id="new-password">
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirm-password">Confirm New Password</label>
+                                    <input type="password" id="confirm-password">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Update Password</button>
+                            </form>
+                        </div>
+                        <div class="profile-tab" id="preferences-tab">
+                            <h2>Preferences</h2>
+                            <div class="preferences-section">
+                                <h3>Notifications</h3>
+                                <div class="preference-item">
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                    <span>Email notifications for new courses</span>
+                                </div>
+                                <div class="preference-item">
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                    <span>Progress reminders</span>
+                                </div>
+                                <div class="preference-item">
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider"></span>
+                                    </label>
+                                    <span>Marketing emails</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile-tab" id="certificates-tab">
+                            <h2>My Certificates</h2>
+                            <div class="certificates-grid" id="certificates-grid">
+                                <!-- Certificates will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Quiz Modal -->
+    <div class="modal" id="quiz-modal">
+        <div class="modal-content quiz-content">
+            <div class="modal-header">
+                <h2 id="quiz-title">Quiz</h2>
+                <span class="close" id="close-quiz">&times;</span>
+            </div>
+            <div class="quiz-container" id="quiz-container">
+                <!-- Quiz content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="lms.js"></script>
+</body>
+</html>
